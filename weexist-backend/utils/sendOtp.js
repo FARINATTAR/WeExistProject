@@ -73,3 +73,4 @@ const sendOTP = async (toEmail, otp) => {
     throw new Error("Failed to send OTP: " + error.message);
   }
 };
+export default sendOTP;

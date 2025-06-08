@@ -232,11 +232,12 @@ console.log("🔐 ENV USER:", process.env.EMAIL_USER);
 try {
   await sendOTP(email, otp);
 } catch (err) {
+  console.error("❌ Error in sendOTP:", err);
   if (transactionStarted) {
     await session.abortTransaction();
   }
   session.endSession();
-  return res.status(500).json({ message: "Failed to send OTP" });
+  return res.status(500).json({ message: "Failed to send OTP", error: err.message || err  });
 }
 
 
