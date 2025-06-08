@@ -244,8 +244,11 @@ try {
     await session.commitTransaction();
     session.endSession();
 
-    res.status(201).json({ message: "OTP sent to email. Verify to activate account." });
-
+    res.status(201).json({
+      success: true,
+      isVerified: false,
+      message: "OTP sent to email. Verify to activate account."
+    });
   } catch (error) {
     if (transactionStarted) {
       await session.abortTransaction();
