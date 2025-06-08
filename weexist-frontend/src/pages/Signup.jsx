@@ -356,7 +356,7 @@ function Signup() {
 
     const redirectPath = location.state?.from || new URLSearchParams(location.search).get('redirect') || '/';
 
-    const API_URL = import.meta.env.VITE_API_URL || "https://weexist-backend.onrender.com";
+    const API_URL = import.meta.env.VITE_API_URL || "https://weexistproject.onrender.com";
 
     const togglePasswordVisibility = (field) => {
         if (field === 'password') {
