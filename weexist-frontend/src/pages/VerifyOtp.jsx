@@ -8,36 +8,39 @@ function VerifyOtp() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const email = location.state?.email;
+    const email = location.state?.email || localStorage.getItem("pendingEmail");
     const redirect = new URLSearchParams(location.search).get('redirect') || '/login';
 
     const API_URL = import.meta.env.VITE_API_URL || "https://weexistproject.onrender.com";
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!otp) return toast.error("Please enter the OTP");
+    e.preventDefault();
+    if (!otp) return toast.error("Please enter the OTP");
 
-        setLoading(true);
-        try {
-            const response = await fetch(`${API_URL}/auth/verify-otp`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, otp }),
-            });
-            const result = await response.json();
+    setLoading(true);
+    try {
+        console.log("Sending to backend:", { email, otp }); // ✅ log to debug
 
-            if (result.success) {
-                toast.success("Verification successful! Please login.");
-                setTimeout(() => navigate(`/login?redirect=${redirect}`), 2000);
-            } else {
-                toast.error(result.message || "Invalid OTP");
-            }
-        } catch (err) {
-            toast.error("Something went wrong. Try again.");
-        } finally {
-            setLoading(false);
+        const response = await fetch(`${API_URL}/auth/verify-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, otp }),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            toast.success("Verification successful! Please login.");
+            setTimeout(() => navigate(`/login?redirect=${redirect}`), 2000);
+        } else {
+            toast.error(result.message || "Invalid OTP");
         }
-    };
+    } catch (err) {
+        toast.error("Something went wrong. Try again.");
+    } finally {
+        setLoading(false);
+    }
+};
 
     const handleResendOtp = async () => {
         if (!email) return toast.error("Email not found.");

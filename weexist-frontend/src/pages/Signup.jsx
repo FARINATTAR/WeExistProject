@@ -371,71 +371,91 @@ function Signup() {
         setSignupInfo((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSignup = async (e) => {
-        e.preventDefault();
-        const {
-            name, email, password, confirmPassword, phone,
-            gender, dateOfBirth, street, area, pincode
-        } = signupInfo;
+const handleSignup = async (e) => {
+    e.preventDefault();
 
-        if (!name || !email || !password || !confirmPassword ||
-            !phone || !gender || !dateOfBirth || !street || !area || !pincode) {
-            return toast.error('All fields are required.', { position: 'top-right', autoClose: 3000 });
-        }
+    const {
+        name, email, password, confirmPassword, phone,
+        gender, dateOfBirth, street, area, pincode
+    } = signupInfo;
 
-        if (password !== confirmPassword) {
-            return toast.error('Passwords do not match.', { position: 'top-right', autoClose: 3000 });
-        }
+    // 🔒 Field validation
+    if (!name || !email || !password || !confirmPassword ||
+        !phone || !gender || !dateOfBirth || !street || !area || !pincode) {
+        return toast.error('All fields are required.', { position: 'top-right', autoClose: 3000 });
+    }
 
-        setIsLoading(true);
-        try {
-            const response = await fetch(`${API_URL}/auth/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name,
-                    email,
-                    password,
-                    phone,
-                    gender,
-                    dateOfBirth,
-                    address: {
-                        street,
-                        area,
-                        pincode
-                    },
-                    role: "volunteer" // optional: make this dynamic later
-                }),
-            });
+    if (password !== confirmPassword) {
+        return toast.error('Passwords do not match.', { position: 'top-right', autoClose: 3000 });
+    }
 
-            const result = await response.json();
-            console.log(result);
+    setIsLoading(true);
+    try {
+        const response = await fetch(`${API_URL}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name,
+                email,
+                password,
+                phone,
+                gender,
+                dateOfBirth,
+                address: {
+                    street,
+                    area,
+                    pincode
+                },
+                role: "volunteer"
+            }),
+        });
 
-            if (result.success) {
-                if (result.isVerified === false) {
-                    toast.info('OTP sent to your email. Please verify.', { position: 'top-right', autoClose: 2500 });
-                    setTimeout(() => {
-                        navigate(`/verify-otp?redirect=${encodeURIComponent(redirectPath)}`, {
-                            state: { email }
-                        });
-                    }, 1000);
-                } else {
-                    toast.success(result.message || 'Signup successful!', { position: 'top-right', autoClose: 2000 });
-                    setTimeout(() => {
-                        navigate(`/login?redirect=${encodeURIComponent(redirectPath)}`, {
-                            state: { from: redirectPath }
-                        });
-                    }, 1000);
-                }
+        const result = await response.json();
+        console.log("Signup response:", result);
+
+        if (result.success) {
+            // 🔐 Store email for fallback if needed
+            localStorage.setItem("pendingEmail", email);
+
+            if (result.isVerified === false) {
+                toast.info('OTP sent to your email. Please verify.', {
+                    position: 'top-right',
+                    autoClose: 2500
+                });
+
+                setTimeout(() => {
+                    navigate(`/verify-otp?redirect=${encodeURIComponent(redirectPath)}`, {
+                        state: { email }  // ✅ crucial for VerifyOtp.jsx
+                    });
+                }, 1000);
             } else {
-                toast.error(result.error?.details?.[0]?.message || result.message, { position: 'top-right', autoClose: 3000 });
+                toast.success(result.message || 'Signup successful!', {
+                    position: 'top-right',
+                    autoClose: 2000
+                });
+
+                setTimeout(() => {
+                    navigate(`/login?redirect=${encodeURIComponent(redirectPath)}`, {
+                        state: { from: redirectPath }
+                    });
+                }, 1000);
             }
-        } catch (err) {
-            toast.error(err.message || 'Something went wrong.', { position: 'top-right', autoClose: 3000 });
-        } finally {
-            setIsLoading(false);
+        } else {
+            toast.error(result.error?.details?.[0]?.message || result.message, {
+                position: 'top-right',
+                autoClose: 3000
+            });
         }
-    };
+    } catch (err) {
+        toast.error(err.message || 'Something went wrong.', {
+            position: 'top-right',
+            autoClose: 3000
+        });
+    } finally {
+        setIsLoading(false);
+    }
+};
+
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-purple-100 to-purple-300">
