@@ -11,7 +11,7 @@ function VerifyOtp() {
     const email = location.state?.email;
     const redirect = new URLSearchParams(location.search).get('redirect') || '/login';
 
-    const API_URL = import.meta.env.VITE_API_URL || "https://weexist99.onrender.com";
+    const API_URL = import.meta.env.VITE_API_URL || "https://weexistproject.onrender.com";
 
     const handleSubmit = async (e) => {
         e.preventDefault();
