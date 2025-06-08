@@ -16,7 +16,7 @@ router.post('/register', registerUser);
 // @route   POST /api/auth/verify-otp
 // @desc    Verify OTP and activate account
 // @access  Public
-router.post('/verify-otp', VerifyOTP);
+router.post('/verify-otp', verifyOTP);
 
 // @route   POST /api/auth/resend-otp
 // @desc    Resend OTP to user email
