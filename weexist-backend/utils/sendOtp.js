@@ -48,6 +48,8 @@
 
 
 // export default sendOTP;
+import nodemailer from "nodemailer";
+
 const sendOTP = async (toEmail, otp) => {
   try {
     const transporter = nodemailer.createTransport({
