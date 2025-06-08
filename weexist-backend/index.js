@@ -23,42 +23,43 @@
 // app.listen(PORT, () => {
 //     console.log(`Server is running on ${PORT}`);
 // });
-
 import express from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
 import authRoutes from './Routes/AuthRouter.js';
-import './config/db.js';  // DB connection
+import './config/db.js';
 
 dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+// ✅ Allow multiple origins: deployed + localhost
 const allowedOrigins = [
-  'https://we-exist-project.vercel.app',
-  'http://localhost:5173'
+  'http://localhost:5173',
+  'https://we-exist-project.vercel.app',      // your current frontend URL
+  'https://weexist-frontend.vercel.app'       // optional: if still needed
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+      return callback(null, true);
     }
+    return callback(new Error(`CORS blocked: ${origin} not allowed`));
   },
   credentials: true
 }));
 
 app.use(bodyParser.json());
-app.use('/auth', authRoutes);
+app.use(express.json());
 
-app.get('/ping', (req, res) => {
-  res.send('PONG');
+app.get('/', (req, res) => {
+  res.send('Server running');
 });
 
+app.use('/auth', authRoutes);
+
 app.listen(PORT, () => {
-  console.log(`Server is running on ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
