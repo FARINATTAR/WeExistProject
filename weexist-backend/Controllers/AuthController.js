@@ -208,31 +208,37 @@ export const registerUser = async (req, res) => {
     session.startTransaction();
     transactionStarted = true;
 
-    const newUser = new User({
-      name,
-      email,
-      phone,
-      password: hashedPassword,
-      gender,
-      dateOfBirth,
-      role,
-      address,
-      otp,
-      otpExpires,
-      isVerified: false,
-    });
+// ... inside registerUser
+const newUser = new User({
+  name,
+  email,
+  phone,
+  password: hashedPassword,
+  gender,
+  dateOfBirth,
+  role,
+  address,
+  otp,
+  otpExpires,
+  isVerified: false,
+});
 
-    await newUser.save({ session });
+await newUser.save({ session });
 
-    try {
-      await sendOTP(email, otp);
-    } catch (err) {
-      if (transactionStarted) {
-        await session.abortTransaction();
-      }
-      session.endSession();
-      return res.status(500).json({ message: "Failed to send OTP" });
-    }
+// ✅ ADD THESE LINES BELOW
+console.log("📧 Sending OTP to:", email);
+console.log("🔐 ENV USER:", process.env.EMAIL_USER);
+
+try {
+  await sendOTP(email, otp);
+} catch (err) {
+  if (transactionStarted) {
+    await session.abortTransaction();
+  }
+  session.endSession();
+  return res.status(500).json({ message: "Failed to send OTP" });
+}
+
 
     await session.commitTransaction();
     session.endSession();
