@@ -35,7 +35,7 @@ const HungerImpactSection = () => {
       {/* Main Content */}
       <div className="relative z-10">
         {/* Timer Impact */}
-        <div className="absolute top-8 right-8 flex items-center gap-2">
+        <div className="absolute top-8 right-80 flex items-center gap-2">
           <Clock className="w-6 h-6 text-red-500 animate-pulse" />
           <div className="text-xl font-mono">
             {seconds} seconds
@@ -73,7 +73,7 @@ const HungerImpactSection = () => {
           </div>
 
           {/* Global Crisis Stats */}
-          <div className="flex justify-end">
+          <div className="flex justify-end -mt-[50px]">
             <div className="max-w-2xl space-y-8">
               <div className="text-right">
                 <div className="inline-block">
@@ -85,38 +85,38 @@ const HungerImpactSection = () => {
               </div>
             </div>
           </div>
-
-          {/* Somalia Reality */}
-          <div className="flex items-center justify-center">
+          {/* India Reality */}
+          <div className="flex items-center justify-center -mt-[50px]">
             <div className="text-center max-w-4xl space-y-8">
               <h2 className="text-7xl font-bold">
-                In Somalia,
+                In rural India,
                 <span className="block text-red-500">
-                  walking 10 miles for water
+                  walking miles barefoot for food
                 </span>
-                is not a choice.
+                isn’t a story.
                 <span className="block text-2xl mt-8 text-gray-300">
-                  It's survival.
+                  It’s reality for millions.
                 </span>
               </h2>
             </div>
           </div>
 
-          {/* Yemen Crisis */}
-          <div className="flex justify-start">
+
+          {/* India Crisis - Bihar & Odisha */}
+          <div className="flex justify-start -mt-[20px]">
             <div className="max-w-2xl space-y-4">
               <h3 className="text-5xl font-bold">
-                In Yemen:
+                In Bihar and Odisha:
               </h3>
               <p className="text-2xl text-gray-300">
-                Families don't choose between different meals.
-                They choose between food and medicine.
+                Families survive on rice water and salt —
+                not by choice, but by helplessness.
               </p>
             </div>
           </div>
 
           {/* Call to Action */}
-          <div className="min-h-screen flex items-center justify-center -mt-[150px]">
+          <div className="min-h-screen flex items-center justify-center -mt-[250px]">
             <div className="text-center space-y-8">
               <h2 className="text-7xl font-bold">
                 This story

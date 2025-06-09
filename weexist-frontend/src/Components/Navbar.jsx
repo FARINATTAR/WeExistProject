@@ -7,7 +7,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-slate-950 text-white p-4 shadow-lg font-poppins w-full">
+    <nav className=" text-black p-4 shadow-lg font-poppins w-full">
       <div className="max-w-screen-xl w-full px-4 mx-auto flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold flex items-center">
           <img src={logo} alt="WeExist Logo" className="h-12 w-12 rounded-4xl" />
@@ -15,7 +15,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-white focus:outline-none"
+          className="md:hidden text-black focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -40,7 +40,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <ul className="md:hidden flex flex-col bg-black p-4 space-y-4">
+        <ul className="md:hidden flex flex-col  p-4 space-y-4">
           <NavItem to="/" label="Home" mobile onClick={() => setIsOpen(false)} />
           <NavItem to="/what-we-do" label="What We Do" mobile onClick={() => setIsOpen(false)} />
           <NavItem to="/leftover-to-life" label="Leftover to Life" mobile onClick={() => setIsOpen(false)} />

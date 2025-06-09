@@ -3,9 +3,9 @@ import { Trophy, Star, LockKeyhole } from 'lucide-react';
 
 const BadgesSection = () => {
   return (
-    <div className="bg-black text-white p-16 rounded-lg w-full max-w-6xl mx-auto">
+    <div className="bg-blue-50 text-white p-16 rounded-lg w-full max-w-6xl mx-auto">
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold mb-4">Join Our Community of Change Makers</h2>
+        <h2 className="text-4xl text-black font-bold mb-4">Join Our Community of Change Makers</h2>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto">Sign up to be part of WeExist and start your journey of making a difference. Every contribution counts, and we celebrate each step.</p>
       </div>
 
@@ -50,11 +50,10 @@ const BadgesSection = () => {
         </div>
       </div>
 
-      <div className="text-center max-w-xl mx-auto">
+      <div className="text-center max-w-xl mx-auto mb-32">
         <button className="w-full px-8 py-4 text-lg font-semibold rounded-lg bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 transform hover:scale-105 transition-all duration-300 mb-4">
           View Your All Badges
         </button>
-        <p className="text-gray-400">Join 5,000+ members making a difference every day</p>
       </div>
     </div>
   );
