@@ -27,7 +27,7 @@ const TypewriterEffect = ({ text, onComplete, speed = 45, className }) => {
   
     return (
       <h1
-        className={`text-3xl md:text-5xl font-bold text-white text-center ${className}`}
+        className={`text-3xl md:text-5xl font-bold text-black text-center ${className} `}
       >
         {displayedText}
       </h1>
@@ -281,10 +281,10 @@ const IntroSection = () => {
       }, [stage, currentImageIndex]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-black p-4 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col p-4 relative overflow-hidden -mt-[80px]">
       <div className="w-full fixed top-0 left-0 z-50">
       </div>
-      <div className="flex flex-col items-center justify-center flex-grow mt-16">
+      <div className="flex flex-col items-center justify-center flex-grow ">
         {stage === 2 && (
           <div className="absolute w-full h-96">
             <img
@@ -310,7 +310,7 @@ const IntroSection = () => {
           >
             <TypewriterEffect
               text="WeExist: More Than Just a Platform"
-              className= "-mt-[100px]"
+              // className= "-mt-[100px]"
               speed={30}
               onComplete={() => setStage(1)}
             />
@@ -328,7 +328,7 @@ const IntroSection = () => {
               className="mb-[25px]"
               onComplete={() => setTimeout(() => setStage(2), 150)}
             />
-            <div className="relative w-full h-96 flex items-center justify-center mt-8">
+            <div className="relative w-full h-96 flex items-center justify-center ">
               <motion.img
                 src={food}
                 alt="Food Pack"
@@ -360,7 +360,7 @@ const IntroSection = () => {
               className="mb-[25px]"
               onComplete={() => setTimeout(() => setStage(3), 150)}
             />
-            <div className="relative w-full h-96 flex items-center justify-center mt-8">
+            <div className="relative w-full h-96 flex items-center justify-center">
               <motion.img
                 src={student}
                 alt="Student"
@@ -385,7 +385,7 @@ const IntroSection = () => {
               className="mb-[25px]"
               onComplete={() => setTimeout(() => setStage(4), 150)}
             />
-            <div className="relative w-full h-96 flex items-center justify-center mt-8">
+            <div className="relative w-full h-96 flex items-center justify-center mb-32">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentImageIndex}
@@ -411,7 +411,7 @@ const IntroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5 }}
-            className="w-full"
+            className="w-full "
           >
             <TypewriterEffect
               text="Making giving simple, impactful, and transparent"
@@ -450,7 +450,7 @@ const IntroSection = () => {
               {/* Animated background effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 blur-xl animate-pulse" />
 
-              <div className="relative z-10 text-center space-y-8">
+              <div className="relative z-10 text-center space-y-8 mt-[80px]">
                 <motion.h1
                   className="text-5xl md:text-7xl font-bold"
                   initial={{ y: 20 }}
@@ -461,7 +461,7 @@ const IntroSection = () => {
                     Change Lives
                   </span>
                   <br />
-                  <span className="text-white">In Real Time</span>
+                  <span className="text-black">In Real Time</span>
                 </motion.h1>
 
                 <motion.div
@@ -481,7 +481,7 @@ const IntroSection = () => {
                   </motion.button>
 
                   <motion.div
-                    className="flex gap-8 text-gray-300 text-lg"
+                    className="flex gap-8 text-gray-700 text-lg"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.2 }}

@@ -4,15 +4,12 @@ import IntroSection from "../Components/IntoWhatWeDo";
 
 const WhatWeDo = () => {
   return (
-    <div className="bg-black">
+    <div className="bg-blue-50">
       <Navbar />
       <div>
         <IntroSection />
       </div>
 
-      <div>
-        <ImpactTracker />
-      </div>
     </div>
   );
 };
