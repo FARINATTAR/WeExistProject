@@ -26,7 +26,6 @@ export default function Navbar() {
           <NavItem to="/" label="Home" />
           <NavItem to="/what-we-do" label="What We Do" />
           <NavItem to="/leftover-to-life" label="Leftover to Life" />
-          <NavItem to="/give-a-hand" label="Give a Hand" />
           <NavItem to="/gamified-giving" label="Gamified giving" />
           <NavItem to="/get-involved" label="Get Involved" />
         </ul>
@@ -44,7 +43,6 @@ export default function Navbar() {
           <NavItem to="/" label="Home" mobile onClick={() => setIsOpen(false)} />
           <NavItem to="/what-we-do" label="What We Do" mobile onClick={() => setIsOpen(false)} />
           <NavItem to="/leftover-to-life" label="Leftover to Life" mobile onClick={() => setIsOpen(false)} />
-          <NavItem to="/give-a-hand" label="Give a Hand" mobile onClick={() => setIsOpen(false)} />
           <NavItem to="/badges" label="Badges" mobile onClick={() => setIsOpen(false)} />
           <NavItem to="/get-involved" label="Get Involved" mobile onClick={() => setIsOpen(false)} />
           <li>
