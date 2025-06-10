@@ -1,34 +1,10 @@
-// import express from 'express';
-// import bodyParser from 'body-parser';
-// import cors from 'cors';
-// import dotenv from 'dotenv';
-// import authRoutes from './Routes/AuthRouter.js';
-// import './config/db.js';  // <-- Add this import to initialize the DB connection
-
-// dotenv.config();
-
-// const app = express();
-// const PORT = process.env.PORT || 8080;
-
-// app.get('/ping', (req, res) => {
-//     res.send('PONG');
-// });
-
-// app.use(cors());
-
-// app.use(bodyParser.json());
-// app.use(cors());
-// app.use('/auth', authRoutes);
-
-// app.listen(PORT, () => {
-//     console.log(`Server is running on ${PORT}`);
-// });
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import authRoutes from './Routes/AuthRouter.js';
 import './config/db.js';
+import volunteerRoutes from './Routes/volunteerRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -58,6 +34,7 @@ app.get('/', (req, res) => {
   res.send('Server running');
 });
 
+app.use('/api/volunteer', volunteerRoutes);
 app.use('/auth', authRoutes);
 
 app.listen(PORT, () => {

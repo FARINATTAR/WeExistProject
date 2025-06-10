@@ -18,8 +18,6 @@ const RoleSelection = () => {
             <ChooseRole/>
         </div>
 
- 
-
       <div className='w-full'>
         <Footer/>
       </div>

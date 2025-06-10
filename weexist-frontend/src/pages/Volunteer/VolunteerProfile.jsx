@@ -1,14 +1,28 @@
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
 
 const VolunteerProfile = () => {
-  const [availability, setAvailability] = useState("");
-  const navigate = useNavigate(); // ✅ You missed this
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    availability: '',
+  });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted!"); // Optional debug
-    navigate('/volunteer/thankyou'); // ✅ Redirect on submit
+    try {
+      await axios.post('http://localhost:8080/api/volunteer', formData);
+      navigate('/volunteer/thankyou');
+    } catch (error) {
+      console.error('Submission error:', error);
+    }
   };
 
   return (
@@ -21,7 +35,9 @@ const VolunteerProfile = () => {
             <input
               type="text"
               name="name"
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-500 text-black"
               required
             />
           </div>
@@ -31,7 +47,9 @@ const VolunteerProfile = () => {
             <input
               type="email"
               name="email"
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-500 text-black"
               required
             />
           </div>
@@ -41,7 +59,9 @@ const VolunteerProfile = () => {
             <input
               type="tel"
               name="phone"
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-500 text-black"
               required
             />
           </div>
@@ -50,8 +70,8 @@ const VolunteerProfile = () => {
             <label className="block text-sm font-medium text-gray-700 mb-1">Availability</label>
             <select
               name="availability"
-              value={availability}
-              onChange={(e) => setAvailability(e.target.value)}
+              value={formData.availability}
+              onChange={handleChange}
               className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-500 text-black"
               required
             >

@@ -181,7 +181,7 @@ const ChooseRole = () => {
   onClick={(e) => {
     e.stopPropagation(); // prevent triggering the card click again
     if (role === 'volunteer') {
-      navigate('/volunteer/profile');
+      navigate('/volunteer');
     } else {
       handleCardClick(role); // fallback to existing logic
     }
