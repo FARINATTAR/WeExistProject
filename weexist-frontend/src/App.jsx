@@ -40,6 +40,11 @@ import DonationPage from "./pages/Donate";
 import LeftOverToLife from "./pages/LeftOverToLife";
 import VerifyOtp from "./pages/VerifyOtp";
 import RoleSelection from "./pages/RoleSelectionPage";
+import VolunteerRoutes from "./routes/VolunteerRoutes";
+import VolunteerProfile from "./pages/Volunteer/VolunteerProfile";
+import VolunteerThankyou from "./pages/Volunteer/VolunteerThankYou";
+
+
 const App = () => {
   return (
     <div className="App">
@@ -54,6 +59,11 @@ const App = () => {
         <Route path="/donate" element={<DonationPage />} />
         <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route path="/choose-role" element={<RoleSelection />} />
+        <Route path="/volunteer/*" element={<VolunteerRoutes />} />
+        <Route path="/volunteer/profile" element={<VolunteerProfile />} />
+        <Route path="/volunteer/thankyou" element={<VolunteerThankyou />} />
+        {/* Add more routes as needed */}
+        {/* Redirect to home if no route matches */}
       </Routes>
     </div>
   );

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../../src/ChooseRole.css'; // Ensure this path is correct based on your project structure
 import Navbar from '../Components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 const ChooseRole = () => {
+  const navigate = useNavigate();
   const [stage] = useState(0);
   const [currentImageIndex] = useState(0);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
@@ -56,17 +58,40 @@ const ChooseRole = () => {
 
   const startJourney = () => {
     if (selectedRole) {
+      // Optional animation
       document.body.style.transition = 'all 1s ease';
       document.body.style.background = 'radial-gradient(circle, #ff6b6b, #000)';
+
+      // Navigate after slight delay
       setTimeout(() => {
-        alert(`🚀 Launching your ${selectedRole.replace('-', ' ')} journey!`);
-      }, 500);
+        switch (selectedRole) {
+          case 'volunteer':
+            navigate('/volunteer/profile');
+            break;
+          case 'food-donor':
+            navigate('/donor/profile');
+            break;
+          case 'child-sponsor':
+            navigate('/sponsor/profile');
+            break;
+          case 'fund-donor':
+            navigate('/fund/profile');
+            break;
+          default:
+            alert('🚀 Role selected but no page set.');
+        }
+      }, 800);
     } else {
+      // Handle no role selected
       const section = document.querySelector('.roles-section');
       section.style.animation = 'shake 0.5s ease-in-out';
-      setTimeout(() => { section.style.animation = ''; section.scrollIntoView({ behavior: 'smooth' }); }, 500);
+      setTimeout(() => {
+        section.style.animation = '';
+        section.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
     }
   };
+
 
   // Particle system
   useEffect(() => {
@@ -151,7 +176,19 @@ const ChooseRole = () => {
     <div className="role-content">
       <p className="role-description">{desc}</p>
       <div className="role-stats">{stats}</div>
-      <button className="role-cta">{cta}</button>
+<button
+  className="role-cta"
+  onClick={(e) => {
+    e.stopPropagation(); // prevent triggering the card click again
+    if (role === 'volunteer') {
+      navigate('/volunteer/profile');
+    } else {
+      handleCardClick(role); // fallback to existing logic
+    }
+  }}
+>
+  {cta}
+</button>
     </div>
   </div>
 ))}

@@ -31,6 +31,7 @@ export default function Navbar() {
 
         {/* Signup & Login Buttons */}
         <div className="hidden md:flex space-x-4">
+          <Link to="/choose-role" className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-blue-500 transition">Roles</Link>
           <Link to="/login" className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-blue-500 transition">Login</Link>
           <Link to="/signup" className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition">Sign Up</Link>
         </div>
