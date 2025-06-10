@@ -2,13 +2,29 @@ import Volunteer from '../Models/volunteerModel.js';
 
 export const saveVolunteerData = async (req, res) => {
   try {
-    const { name, email, phone, availability } = req.body;
+    // Destructure all relevant fields from req.body
+    const {
+      name,
+      email,
+      phone,
+      gender,
+      availability,
+      skills,
+      location,
+      profilePicture,
+      isVerified
+    } = req.body;
 
     const newVolunteer = new Volunteer({
       name,
       email,
       phone,
+      gender,
       availability,
+      skills,
+      location,
+      profilePicture,
+      isVerified
     });
 
     await newVolunteer.save();
