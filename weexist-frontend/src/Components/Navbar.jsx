@@ -7,7 +7,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className=" text-black p-4 shadow-lg font-poppins w-full">
+    <nav className="bg-blue-50 text-black p-4 shadow-lg font-poppins w-full">
       <div className="max-w-screen-xl w-full px-4 mx-auto flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold flex items-center">
           <img src={logo} alt="WeExist Logo" className="h-12 w-12 rounded-4xl" />
@@ -25,7 +25,6 @@ export default function Navbar() {
         <ul className="hidden md:flex space-x-6">
           <NavItem to="/" label="Home" />
           <NavItem to="/what-we-do" label="What We Do" />
-          <NavItem to="/leftover-to-life" label="Leftover to Life" />
           <NavItem to="/gamified-giving" label="Gamified giving" />
           <NavItem to="/get-involved" label="Get Involved" />
         </ul>
@@ -42,7 +41,6 @@ export default function Navbar() {
         <ul className="md:hidden flex flex-col  p-4 space-y-4">
           <NavItem to="/" label="Home" mobile onClick={() => setIsOpen(false)} />
           <NavItem to="/what-we-do" label="What We Do" mobile onClick={() => setIsOpen(false)} />
-          <NavItem to="/leftover-to-life" label="Leftover to Life" mobile onClick={() => setIsOpen(false)} />
           <NavItem to="/badges" label="Badges" mobile onClick={() => setIsOpen(false)} />
           <NavItem to="/get-involved" label="Get Involved" mobile onClick={() => setIsOpen(false)} />
           <li>

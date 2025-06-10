@@ -39,6 +39,7 @@ import GamifiedGiving from "./pages/GamifiedGiving";
 import DonationPage from "./pages/Donate";
 import LeftOverToLife from "./pages/LeftOverToLife";
 import VerifyOtp from "./pages/VerifyOtp";
+import RoleSelection from "./pages/RoleSelectionPage";
 const App = () => {
   return (
     <div className="App">
@@ -52,7 +53,7 @@ const App = () => {
         <Route path="/what-we-do" element={<WhatWeDo />}/>
         <Route path="/donate" element={<DonationPage />} />
         <Route path="/verify-otp" element={<VerifyOtp />} />
-
+        <Route path="/choose-role" element={<RoleSelection />} />
       </Routes>
     </div>
   );

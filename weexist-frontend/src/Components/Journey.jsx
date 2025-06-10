@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import boyImage from '../assets/child-begging-sketch.png';
 
 const WeExistJourneyStory = () => {
   const scrollContainerRef = useRef(null);
@@ -107,9 +108,14 @@ const WeExistJourneyStory = () => {
         return (
           <>
             <div className="absolute top-16 right-10 bg-white p-4 pb-12 shadow-lg transform rotate-8 rounded-sm">
-              <div className="w-48 h-36 bg-gradient-to-br from-gray-800 to-black rounded-sm relative overflow-hidden">
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl opacity-70">📷</div>
-              </div>
+                <div className="w-48 h-36 rounded-sm overflow-hidden shadow-lg">
+                <img 
+                    src={boyImage} 
+                    alt="Boy begging" 
+                    className="w-full h-full object-cover object-top" 
+                />
+                </div>
+
             </div>
             <div className="absolute bottom-20 left-8 right-8 z-10">
               <div className="text-2xl text-slate-800 mb-4 transform -rotate-1" style={{ fontFamily: 'Caveat, cursive', lineHeight: '1.4' }}>
