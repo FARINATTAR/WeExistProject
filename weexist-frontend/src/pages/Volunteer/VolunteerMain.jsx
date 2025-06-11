@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronDown, Users, MapPin, Heart } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import YouthHelping from '../../assets/youth-helping.png'; // Hero
@@ -13,7 +12,6 @@ const VolunteerMain = () => {
   const [scrollY, setScrollY] = useState(0);
   const [introAnimationComplete, setIntroAnimationComplete] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
-  const navigate = useNavigate();
 
   // Throttled scroll handler for better performance
   const handleScroll = useCallback(() => {
@@ -99,7 +97,7 @@ const VolunteerMain = () => {
 
       <div>
         <button
-          onClick={() => navigate('/volunteer/profile')}
+          onClick={() => scrollToSection(1)}
           className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-red-500/25"
         >
           Join as Volunteer now →
@@ -224,7 +222,7 @@ const VolunteerMain = () => {
               Small Acts. Big Impact.
             </p>
             <button
-              onClick={() => navigate('/volunteer/profile')}
+              onClick={handleContinue}
               className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-red-500/25"
             >
               Continue →
@@ -332,7 +330,9 @@ const VolunteerMain = () => {
               Ready to begin?
             </p>
             <button
-              onClick={() => navigate('/volunteer/profile')}
+              onClick={() => {
+                console.log('Navigating to /volunteer/profile');
+              }}
               className="bg-red-500 hover:bg-red-600 text-white px-12 py-5 rounded-full text-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-red-500/25"
             >
               Continue →
