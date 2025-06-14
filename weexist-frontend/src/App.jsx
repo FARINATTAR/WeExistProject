@@ -43,7 +43,7 @@ import RoleSelection from "./pages/RoleSelectionPage";
 import VolunteerRoutes from "./routes/VolunteerRoutes";
 import VolunteerThankYou from "./pages/Volunteer/VolunteerThankYou";
 import VolunteerDashboard from "./Components/Vounteer/VolunteerDashboard";
-import VolunteerProfile from "./pages/volunteer/VolunteerProfile";
+import VolunteerProfile from "./pages/Volunteer/VolunteerProfile";
 
 
 const App = () => {
