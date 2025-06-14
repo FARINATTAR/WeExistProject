@@ -66,16 +66,50 @@ const VolunteerProfile = () => {
     }
   };
 
-  const handleSubmit = async () => {
-    try {
-      console.log('Form submitted:', formData);
-      // Save name to localStorage for Thank You page personalization
-      localStorage.setItem('volunteerName', formData.name);
-      navigate('/volunteer/thankyou');
-    } catch (error) {
-      console.error('Submission error:', error);
+const [isSubmitting, setIsSubmitting] = useState(false);
+
+
+const handleSubmit = async () => {
+  try {
+    if (!formData.name || !formData.email || !formData.phone || !formData.availability) {
+      alert('Please fill in all required fields');
+      return;
     }
-  };
+
+    setIsSubmitting(true);
+    console.log('Form submitted:', formData);
+
+    const submitData = {
+      ...formData,
+      profilePicture: '', // temporarily ignoring profilePicture
+    };
+
+    const response = await fetch('http://localhost:8080/api/volunteer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(submitData),
+    });
+
+    if (!response.ok) {
+      const text = await response.text(); // Use text instead of json in case of HTML error
+      throw new Error(`HTTP error! status: ${response.status} - ${text}`);
+    }
+
+    const result = await response.json();
+    console.log('Volunteer saved successfully:', result);
+
+    localStorage.setItem('volunteerName', formData.name);
+    navigate('/volunteer/thankyou');
+
+  } catch (error) {
+    console.error('Submission error:', error);
+    alert(`Failed to submit form: ${error.message}`);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   const renderStep = () => {
     switch (step) {
@@ -395,10 +429,17 @@ const VolunteerProfile = () => {
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="relative group flex items-center space-x-3 px-10 py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-bold rounded-2xl transition-all duration-300 shadow-xl transform hover:scale-105"
+                disabled={isSubmitting}
+                className={`relative group flex items-center space-x-3 px-10 py-4 ${
+                  isSubmitting 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600'
+                } text-white font-bold rounded-2xl transition-all duration-300 shadow-xl transform hover:scale-105`}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-2xl blur opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
-                <span className="relative">Submit Profile</span>
+                <span className="relative">
+                  {isSubmitting ? 'Submitting...' : 'Submit Profile'}
+                </span>
                 <Star className="relative w-5 h-5" />
               </button>
             ) : (

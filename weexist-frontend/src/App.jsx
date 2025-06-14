@@ -57,7 +57,7 @@ const App = () => {
         <Route path="/leftover-to-life" element={<LeftOverToLife />}/>
         <Route path="/gamified-giving" element={<GamifiedGiving />} />
         <Route path="/what-we-do" element={<WhatWeDo />}/>
-        <Route path="/donate" element={<DonationPage />} />
+        {/* <Route path="/donate" element={<DonationPage />} /> */}
         <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route path="/choose-role" element={<RoleSelection />} />
         <Route path="/volunteer/*" element={<VolunteerRoutes />} />
