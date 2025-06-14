@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import authRoutes from './Routes/AuthRouter.js';
 import './config/db.js';
 import volunteerRoutes from './Routes/volunteerRoutes.js';
+import taskRoutes from './Routes/taskRoutes.js'; // Ensure this is imported if you have task routes
 
 dotenv.config();
 const app = express();
@@ -30,6 +31,7 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({limit: '10mb', extended: true })); // For form data
+app.use('/api/tasks', taskRoutes);
 
 app.get('/', (req, res) => {
   res.send('Server running');

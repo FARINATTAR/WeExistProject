@@ -1,72 +1,54 @@
-import React, { useState } from 'react';
+// src/components/VolunteerDashboard/OngoingTasks.jsx
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const OngoingTasks = () => {
-  const [tasks, setTasks] = useState([
-    {
-      id: 101,
-      title: 'Help with Food Drive',
-      location: 'Dadar, Mumbai',
-      date: 'June 12, 2025',
-      status: 'In Progress',
-    },
-    {
-      id: 102,
-      title: 'Event Setup Volunteer',
-      location: 'Thane, Mumbai',
-      date: 'June 14, 2025',
-      status: 'In Progress',
-    },
-  ]);
+const OngoingTasks = ({ refreshCount }) => {
+  const [tasks, setTasks] = useState([]);
 
-  const markCompleted = (id) => {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, status: 'Completed' } : task
-      )
-    );
+  useEffect(() => {
+    const volunteerName = localStorage.getItem('volunteerName');
+    if (!volunteerName) return;
+
+    axios.get(`http://localhost:8080/api/tasks/assigned/${volunteerName}`)
+      .then(res => setTasks(res.data))
+      .catch(err => console.error("Error fetching assigned tasks:", err));
+  }, [ReferenceError]);
+
+  const handleComplete = async (taskId) => {
+    try {
+      await axios.patch(`http://localhost:8080/api/tasks/mark-complete/${taskId}`);
+      setTasks(prev => prev.filter(task => task._id !== taskId));
+      alert("Task marked as completed!");
+    } catch (err) {
+      console.error("Error completing task:", err);
+    }
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-2xl p-6">
-      <h3 className="text-lg font-semibold text-gray-800 mb-4">🕒 Ongoing Tasks</h3>
+    <div className="bg-white rounded-xl shadow-md p-6 mt-6">
+      <h3 className="text-xl font-semibold mb-4 text-green-700">Ongoing Tasks</h3>
       {tasks.length === 0 ? (
-        <p className="text-gray-600 text-sm">No ongoing tasks at the moment.</p>
+        <p className="text-gray-500">No tasks in progress.</p>
       ) : (
-        <div className="space-y-4">
-          {tasks.map((task) => (
-            <div
-              key={task.id}
-              className={`border p-4 rounded-lg ${
-                task.status === 'Completed'
-                  ? 'bg-green-50 border-green-300'
-                  : 'border-gray-200'
-              }`}
-            >
-              <div className="flex justify-between items-center mb-2">
-                <h4 className="font-bold text-gray-700">{task.title}</h4>
-                <span
-                  className={`text-xs px-2 py-0.5 rounded-full ${
-                    task.status === 'Completed'
-                      ? 'bg-green-200 text-green-800'
-                      : 'bg-yellow-100 text-yellow-700'
-                  }`}
-                >
-                  {task.status}
-                </span>
-              </div>
-              <p className="text-sm text-gray-600">📍 {task.location}</p>
-              <p className="text-sm text-gray-600">📅 {task.date}</p>
-              {task.status !== 'Completed' && (
-                <button
-                  onClick={() => markCompleted(task.id)}
-                  className="mt-3 text-sm bg-green-600 hover:bg-green-700 text-white px-4 py-1.5 rounded-full transition"
-                >
-                  Mark as Completed
-                </button>
-              )}
-            </div>
+        <ul className="space-y-4">
+          {tasks.map(task => (
+            <li key={task._id} className="border p-4 rounded-md shadow-sm">
+              <h4 className="font-bold text-lg">{task.title}</h4>
+              <p className="text-sm text-gray-600">{task.description}</p>
+              <p className="mt-2 text-gray-500">
+                📍 {task.location.city}, {task.location.state}<br />
+                📅 {new Date(task.date).toLocaleDateString()}<br />
+                Status: <span className="font-medium text-yellow-600">{task.status}</span>
+              </p>
+              <button
+                onClick={() => handleComplete(task._id)}
+                className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+              >
+                Mark as Completed
+              </button>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );
