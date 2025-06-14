@@ -3,6 +3,7 @@ import ProfileCard from './ProfileCard';
 import NearbyRequestsList from './NearbyRequestsList';
 import MyTasksPanel from './MyTasksPanel';
 import ActivityHistory from './ActivityHistory';
+import NearbyTasks from './NearbyTasks';
 
 const VolunteerDashboard = () => {
   return (
@@ -13,7 +14,8 @@ const VolunteerDashboard = () => {
         {/* Left Column (Profile & Requests) */}
         <div className="lg:col-span-1 flex flex-col gap-6">
           <ProfileCard />
-          <NearbyRequestsList />
+          {/* <NearbyRequestsList /> */}
+          <NearbyTasks />
         </div>
 
         {/* Right Column (My Tasks & History) */}
