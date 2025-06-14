@@ -41,8 +41,9 @@ import LeftOverToLife from "./pages/LeftOverToLife";
 import VerifyOtp from "./pages/VerifyOtp";
 import RoleSelection from "./pages/RoleSelectionPage";
 import VolunteerRoutes from "./routes/VolunteerRoutes";
-import VolunteerProfile from "./pages/Volunteer/VolunteerProfile";
-import VolunteerThankyou from "./pages/Volunteer/VolunteerThankYou";
+import VolunteerThankYou from "./pages/Volunteer/VolunteerThankYou";
+import VolunteerDashboard from "./Components/Vounteer/VolunteerDashboard";
+import VolunteerProfile from "./pages/volunteer/VolunteerProfile";
 
 
 const App = () => {
@@ -61,7 +62,8 @@ const App = () => {
         <Route path="/choose-role" element={<RoleSelection />} />
         <Route path="/volunteer/*" element={<VolunteerRoutes />} />
         <Route path="/volunteer/profile" element={<VolunteerProfile />} />
-        <Route path="/volunteer/thankyou" element={<VolunteerThankyou />} />
+        <Route path="/volunteer/thankyou" element={<VolunteerThankYou />} />
+        <Route path="/volunteer/dashboard" element={<VolunteerDashboard />} />
         {/* Add more routes as needed */}
         {/* Redirect to home if no route matches */}
       </Routes>
